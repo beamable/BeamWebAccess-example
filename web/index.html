@@ -11,6 +11,8 @@ const beam_cid = '1418422019508250';
 const beam_pid = 'DE_1719820960373762';
 const beam_scope = beam_cid + '.' + beam_pid;
 
+const beam_microservice_name = 'BeamWebAccess';
+
 var access_token;
 var refresh_token; // refresh_token is not used in this example. For long term use, it should be stored persistently, such as in a cookie.
 var player_id;
@@ -111,6 +113,34 @@ function update_avatar(evt) {
         fetch_avatar();
     });
 }
+
+function roll_dice(evt) {
+    evt.preventDefault();
+    let request = $.ajax(beam_api_url + '/basic/' + beam_scope + '.micro_' + beam_microservice_name + '/RollDice', {
+        method: 'POST',
+        headers: {
+            'X-BEAM-SCOPE': beam_scope,
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+    request.done(function(data) {
+        $('#dice-output').text('RollDice response: ' + data);
+    });
+}
+
+function check_dice(evt) {
+    evt.preventDefault();
+    let request = $.ajax(beam_api_url + '/basic/' + beam_scope + '.micro_' + beam_microservice_name + '/CheckDiceRolled', {
+        method: 'POST',
+        headers: {
+            'X-BEAM-SCOPE': beam_scope,
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+    request.done(function(data) {
+        $('#dice-output').text('CheckDiceRolled response: ' + data);
+    });
+}
 </script>
 
 <p><b>Login with Email and Password</b></p>
@@ -144,6 +174,18 @@ function update_avatar(evt) {
         <option value="Avatar3">Avatar3</option>
     </select>
     <input type="submit" value="Update">
+</form>
+
+<div>
+    <samp><span id="dice-output"></span></samp>
+</div>
+
+<form onsubmit="return roll_dice(event)">
+    <input type="submit" value="Roll Dice">
+</form>
+
+<form onsubmit="return check_dice(event)">
+    <input type="submit" value="Check Dice">
 </form>
     
 </body>

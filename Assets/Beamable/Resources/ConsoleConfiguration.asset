@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToggleAction:
     KeyCode: 96
-  ForceEnabled: 0
+  ForceEnabled: 1

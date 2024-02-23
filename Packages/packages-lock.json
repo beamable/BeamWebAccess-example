@@ -14,6 +14,15 @@
       },
       "url": "https://nexus.beamable.com/nexus/content/repositories/unity"
     },
+    "com.beamable.server": {
+      "version": "1.19.14",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.beamable": "1.19.14"
+      },
+      "url": "https://nexus.beamable.com/nexus/content/repositories/unity"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.4",
       "depth": 1,
