@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><title>Beamable Web Interaction Example</title></head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+const beam_api_url = 'https://api.beamable.com';
+
+const beam_cid = '1418422019508250';
+const beam_pid = 'DE_1719820960373762';
+const beam_scope = beam_cid + '.' + beam_pid;
+
+var access_token;
+var refresh_token; // refresh_token is not used in this example. For long term use, it should be stored persistently, such as in a cookie.
+var player_id;
+
+function login(evt) {
+    evt.preventDefault();
+    let request = $.ajax(beam_api_url + '/basic/auth/token', {
+        method: 'POST',
+        headers: {'X-BEAM-SCOPE': beam_scope},
+        data: {
+            grant_type: 'password',
+            username: $('#login-username').val(),
+            password: $('#login-password').val(),
+        }
+    });
+    request.done(function(data) {
+        access_token = data.access_token;
+        refresh_token = data.refresh_token;
+        $.ajax(beam_api_url + '/basic/accounts/me', {
+            method: 'GET',
+            headers: {
+                'X-BEAM-SCOPE': beam_scope,
+                Authorization: 'Bearer ' + access_token,
+            }
+        }).done(function(accountData) {
+            player_id = accountData.id;
+            $('#account-output').text(JSON.stringify(accountData));
+            fetch_avatar();
+        });
+    });
+    return false;
+}
+
+function fetch_avatar() {
+    let request = $.ajax(beam_api_url + '/object/stats/client.public.player.' + player_id + '/client', {
+        method: 'GET',
+        headers: {
+            'X-BEAM-SCOPE': beam_scope,
+            Authorization: 'Bearer ' + access_token
+        }
+    });
+    request.done(function(data)
+    {
+        let alias = data.stats.alias;
+        let avatar = data.stats.avatar;
+        let updates = data.stats.updates;
+        $('#display-name').text(alias);
+        $('#player-avatar').text(avatar);
+        $('#update-tally-counter').text(updates);
+    });
+}
+
+function update_avatar(evt) {
+    evt.preventDefault();
+    let request = $.ajax(beam_api_url + '/object/stats/client.public.player.' + player_id + '/client', {
+        method: 'POST',
+        headers: {
+            'X-BEAM-SCOPE': beam_scope,
+            Authorization: 'Bearer ' + access_token
+        },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'set': {
+                'alias': $('#update-avatar-alias').val(),
+                'avatar': $('#update-avatar-avatar').val()
+            },
+            'add': {
+                'updates': 1
+            }
+        })
+    });
+    request.done(function(data) {
+        if (data.result != 'ok') {
+            console.log('Unexpected stats POST response: ' + JSON.stringify(data));
+        }
+        fetch_avatar();
+    });
+}
+</script>
+
+<form onsubmit="return login(event)">
+    <label>Email: <input type="text" name="username" id="login-username"></label>
+    <label>Password: <input type="password" name="password" id="login-password"></label>
+    <input type="submit" value="Login">
+</form>
+
+<div>
+    <samp><span id="account-output"></span></samp>
+</div>
+
+<table>
+    <tr><th>Display Name</th><td><span id="display-name">(Unknown)</span></td></tr>
+    <tr><th>Avatar</th><td><span id="player-avatar">N/A</span></td></tr>
+    <tr><th>Update #</th><td><span id="update-tally-counter">0</span></td></tr>
+</table>
+
+<form onsubmit="return update_avatar(event)">
+    <label>Enter new display name: <input type="text" name="alias" id="update-avatar-alias"></label>
+    <label for="update-avatar-avatar">Pick new avatar:</label>
+    <select name="avatar" id="update-avatar-avatar">
+        <option value="Avatar1">Avatar1</option>
+        <option value="Avatar2">Avatar2</option>
+        <option value="Avatar3">Avatar3</option>
+    </select>
+    <input type="submit" value="Update">
+</form>
+    
+</body>
+</html>
