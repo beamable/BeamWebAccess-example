@@ -17,6 +17,7 @@ var player_id;
 
 function login(evt) {
     evt.preventDefault();
+    clear_avatar_display();
     let request = $.ajax(beam_api_url + '/basic/auth/token', {
         method: 'POST',
         headers: {'X-BEAM-SCOPE': beam_scope},
@@ -26,22 +27,36 @@ function login(evt) {
             password: $('#login-password').val(),
         }
     });
-    request.done(function(data) {
-        access_token = data.access_token;
-        refresh_token = data.refresh_token;
-        $.ajax(beam_api_url + '/basic/accounts/me', {
-            method: 'GET',
-            headers: {
-                'X-BEAM-SCOPE': beam_scope,
-                Authorization: 'Bearer ' + access_token,
-            }
-        }).done(function(accountData) {
-            player_id = accountData.id;
-            $('#account-output').text(JSON.stringify(accountData));
-            fetch_avatar();
-        });
-    });
+    request.done(process_auth_response);
     return false;
+}
+
+function guest_login(evt) {
+    evt.preventDefault();
+    clear_avatar_display();
+    let request = $.ajax(beam_api_url + '/basic/auth/token', {
+        method: 'POST',
+        headers: {'X-BEAM-SCOPE': beam_scope},
+        data: {grant_type: 'guest'}
+    });
+    request.done(process_auth_response);
+    return false;
+}
+
+function process_auth_response(data) {
+    access_token = data.access_token;
+    refresh_token = data.refresh_token;
+    $.ajax(beam_api_url + '/basic/accounts/me', {
+        method: 'GET',
+        headers: {
+            'X-BEAM-SCOPE': beam_scope,
+            Authorization: 'Bearer ' + access_token,
+        }
+    }).done(function(accountData) {
+        player_id = accountData.id;
+        $('#account-output').text(JSON.stringify(accountData));
+        fetch_avatar();
+    });
 }
 
 function fetch_avatar() {
@@ -61,6 +76,13 @@ function fetch_avatar() {
         $('#player-avatar').text(avatar);
         $('#update-tally-counter').text(updates);
     });
+}
+
+function clear_avatar_display()
+{
+    $('#display-name').text('(Unknown)');
+    $('#player-avatar').text('N/A');
+    $('#update-tally-counter').text(0);
 }
 
 function update_avatar(evt) {
@@ -91,10 +113,16 @@ function update_avatar(evt) {
 }
 </script>
 
+<p><b>Login with Email and Password</b></p>
 <form onsubmit="return login(event)">
     <label>Email: <input type="text" name="username" id="login-username"></label>
     <label>Password: <input type="password" name="password" id="login-password"></label>
     <input type="submit" value="Login">
+</form>
+
+<p><b>OR: Login as Guest</b></p>
+<form onsubmit="return guest_login(event)">
+    <input type="submit" value="Guest Login">
 </form>
 
 <div>
