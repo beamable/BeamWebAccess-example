@@ -32,6 +32,16 @@ namespace Beamable.Server.Clients
         }
         
         /// <summary>
+        /// Call the Hello method on the BeamWebAccess microservice
+        /// <see cref="Beamable.Microservices.BeamWebAccess.Hello"/>
+        /// </summary>
+        public Beamable.Common.Promise<string> Hello()
+        {
+            System.Collections.Generic.Dictionary<string, object> serializedFields = new System.Collections.Generic.Dictionary<string, object>();
+            return this.Request<string>("BeamWebAccess", "Hello", serializedFields);
+        }
+        
+        /// <summary>
         /// Call the RollDice method on the BeamWebAccess microservice
         /// <see cref="Beamable.Microservices.BeamWebAccess.RollDice"/>
         /// </summary>

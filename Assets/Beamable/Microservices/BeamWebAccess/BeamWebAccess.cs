@@ -13,6 +13,13 @@ namespace Beamable.Microservices
 		private System.Random _random = new System.Random();
 
 		[ClientCallable]
+		public string Hello()
+		{
+			Debug.Log("Hello invoked");
+			return "Hello, World!";
+		}
+
+		[ClientCallable]
 		public async void RollDice()
 		{
 			Debug.Log($"Rolling dice for {Context.UserId}.");
