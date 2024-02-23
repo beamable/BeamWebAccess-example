@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
+  m_Name: AddressableAssetSettings
+  m_EditorClassIdentifier: 
+  m_DefaultGroup: db09c9956a23944b6a78cb45af2178af
+  m_currentHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_OptimizeCatalogSize: 0
+  m_BuildRemoteCatalog: 0
+  m_BundleLocalCatalog: 0
+  m_CatalogRequestsTimeout: 0
+  m_DisableCatalogUpdateOnStart: 0
+  m_IgnoreUnsupportedFilesInBuild: 0
+  m_UniqueBundleIds: 0
+  m_NonRecursiveBuilding: 1
+  m_CCDEnabled: 0
+  m_maxConcurrentWebRequests: 3
+  m_ContiguousBundles: 1
+  m_StripUnityVersionFromBundleBuild: 0
+  m_DisableVisibleSubAssetRepresentations: 0
+  m_ShaderBundleNaming: 0
+  m_ShaderBundleCustomNaming: 
+  m_MonoScriptBundleNaming: 0
+  m_CheckForContentUpdateRestrictionsOption: 0
+  m_MonoScriptBundleCustomNaming: 
+  m_RemoteCatalogBuildPath:
+    m_Id: 
+  m_RemoteCatalogLoadPath:
+    m_Id: 
+  m_ContentStateBuildPathProfileVariableName: 
+  m_CustomContentStateBuildPath: 
+  m_ContentStateBuildPath: 
+  m_BuildAddressablesWithPlayerBuild: 0
+  m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
+  m_GroupAssets:
+  - {fileID: 11400000, guid: 2af76d2e2319649699d7127c0571a64b, type: 2}
+  - {fileID: 11400000, guid: 039088d43055a4e378ca98515b895a4f, type: 2}
+  - {fileID: 11400000, guid: 80a01fc376518447797911a3d6ccb349, type: 2}
+  m_BuildSettings:
+    m_CompileScriptsInVirtualMode: 0
+    m_CleanupStreamingAssetsAfterBuilds: 1
+    m_LogResourceManagerExceptions: 1
+    m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
+  m_ProfileSettings:
+    m_Profiles:
+    - m_InheritedParent: 
+      m_Id: a931fe2c247af4136ad9b330701ad539
+      m_ProfileName: Default
+      m_Values:
+      - m_Id: 0f2edc86e986d46c8aa7a8e3ccb2729a
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: 519322598a8d24837962f8649133e8b5
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: b27d1e617cb2b4cbfb52208f911a60b7
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+      - m_Id: 65311f65737c1459ab2853d2ef532e3a
+        m_Value: ServerData/[BuildTarget]
+      - m_Id: 10295c93fc42648efa15e70c43e275c6
+        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+    m_ProfileEntryNames:
+    - m_Id: 0f2edc86e986d46c8aa7a8e3ccb2729a
+      m_Name: BuildTarget
+      m_InlineUsage: 0
+    - m_Id: 519322598a8d24837962f8649133e8b5
+      m_Name: Local.BuildPath
+      m_InlineUsage: 0
+    - m_Id: b27d1e617cb2b4cbfb52208f911a60b7
+      m_Name: Local.LoadPath
+      m_InlineUsage: 0
+    - m_Id: 65311f65737c1459ab2853d2ef532e3a
+      m_Name: Remote.BuildPath
+      m_InlineUsage: 0
+    - m_Id: 10295c93fc42648efa15e70c43e275c6
+      m_Name: Remote.LoadPath
+      m_InlineUsage: 0
+    m_ProfileVersion: 1
+  m_LabelTable:
+    m_LabelNames:
+    - default
+  m_SchemaTemplates: []
+  m_GroupTemplateObjects:
+  - {fileID: 11400000, guid: 6f621f9aebd9046e986a791854b6d847, type: 2}
+  m_InitializationObjects: []
+  m_CertificateHandlerType:
+    m_AssemblyName: 
+    m_ClassName: 
+  m_ActivePlayerDataBuilderIndex: 3
+  m_DataBuilders:
+  - {fileID: 11400000, guid: 94ea14160f47a491ebee9170055cc056, type: 2}
+  - {fileID: 11400000, guid: 9bc91b3ad6fa84d38933f2e3cbd2d9ed, type: 2}
+  - {fileID: 11400000, guid: bb0e65e76e9c74764a4008c0addad67f, type: 2}
+  - {fileID: 11400000, guid: 4d63250bdfab14f799c42418b59f32e3, type: 2}
+  m_ActiveProfileId: a931fe2c247af4136ad9b330701ad539
+  m_HostingServicesManager:
+    m_HostingServiceInfos: []
+    m_Settings: {fileID: 11400000}
+    m_NextInstanceId: 0
+    m_RegisteredServiceTypeRefs: []
+    m_PingTimeoutInMilliseconds: 5000

@@ -1,0 +1,8 @@
+{
+    "cid": "1418422019508250",
+    "alias": "allister-test",
+    "pid": "DE_1719820960373762",
+    "platform": "",
+    "socket": "",
+    "containerPrefix": ""
+}
