@@ -38,6 +38,16 @@ and PID are encoded in two places; you should change them in both.
 * In `Assets/Beamable/Resources/config-defaults.txt` you should modify three fields: `"cid"`, `"alias"`, and `"pid"`. You can find the proper values for these in the `config-defaults.txt` of any other Beamable project that you have created on your own.
 * In `web/index.html` you should modify the constants `beam_cid` and `beam_pid` to match your own realm.
 
+Notes
+-----
+
+### Unity Project is a Stub
+
+Because the primary purpose of this repo is to demonstrate web-based
+interaction with Beamable, the Unity project in the `Assets/` directory
+is just there to serve as a reminder that `config-defaults.txt` exists
+and as a jumping off point for Unity-based testing if needed.
+
 Contact Beamable
 ----------------
 
